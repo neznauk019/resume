@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме HTML-верстальщика</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6d28d9;
+            --secondary: #4c1d95;
+            --accent: #8b5cf6;
+            --light: #f5f3ff;
+            --dark: #1e1b4b;
+            --gray: #64748b;
+            --glow: 0 0 15px rgba(139, 92, 246, 0.6);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1e1b4b, #0f172a);
+            color: var(--light);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .resume-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            background: rgba(30, 27, 75, 0.85);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--glow), 0 20px 50px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1.2s ease-out;
+        }
+        
+        /* Анимированный фон */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15), transparent 70%);
+            animation: float 15s infinite linear;
+        }
+        
+        .circle-1 { width: 300px; height: 300px; top: 10%; left: 5%; animation-duration: 20s; }
+        .circle-2 { width: 450px; height: 450px; top: 40%; right: 5%; animation-duration: 25s; }
+        .circle-3 { width: 200px; height: 200px; bottom: 10%; left: 15%; animation-duration: 15s; }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+        }
+        
+        .position {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            animation: fadeIn 1s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section {
+            padding: 40px;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.6s; }
+        .section:nth-child(5) { animation-delay: 0.8s; }
+        .section:nth-child(6) { animation-delay: 1.0s; }
+        
+        h2 {
+            color: var(--accent);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .skill-category {
+            background: rgba(77, 29, 149, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3), var(--glow);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+        
+        h3 {
+            color: #d8b4fe;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+        
+        li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        li:before {
+            content: "•";
+            color: var(--accent);
+            font-size: 2rem;
+            position: absolute;
+            left: 0;
+            top: -8px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, rgba(139, 92, 246, 0.3), transparent);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: 600;
+            color: #e9d5ff;
+        }
+        
+        .conditions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+        
+        .condition-card {
+            flex: 1;
+            min-width: 250px;
+            background: rgba(77, 29, 149, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .condition-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), var(--glow);
+        }
+        
+        /* Стили для карусели */
+        .portfolio {
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), var(--glow);
+            border: 2px solid var(--accent);
+            height: 450px;
+        }
+        
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            height: 100%;
+        }
+        
+        .carousel-item {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        
+        .carousel-item-content {
+            background: rgba(30, 27, 75, 0.9);
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .carousel-item h4 {
+            font-size: 1.8rem;
+            color: #e9d5ff;
+            margin-bottom: 10px;
+        }
+        
+        .carousel-item p {
+            color: #c4b5fd;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+            gap: 15px;
+        }
+        
+        .carousel-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .carousel-btn:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), var(--glow);
+        }
+        
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(139, 92, 246, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px var(--accent);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(30, 27, 75, 0.7);
+            color: #c4b5fd;
+            font-size: 1.2rem;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, 15px) rotate(5deg); }
+            50% { transform: translate(0, 30px) rotate(0deg); }
+            75% { transform: translate(-20px, 15px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(139, 92, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+            border-radius: 50%;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 900px) {
+            .carousel {
+                height: 400px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .position {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section, .portfolio {
+                padding: 30px 20px;
+            }
+            
+            header {
+                padding: 40px 20px;
+            }
+            
+            .carousel {
+                height: 350px;
+            }
+            
+            .contact-item {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .position {
+                font-size: 1.2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .carousel {
+                height: 300px;
+            }
+            
+            .carousel-item h4 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Анимированный фон -->
+    <div class="bg-animation">
+        <div class="bg-circle circle-1"></div>
+        <div class="bg-circle circle-2"></div>
+        <div class="bg-circle circle-3"></div>
+    </div>
+    
+    <div class="resume-container">
+        <header>
+            <div class="header-content">
+                <h1>Кирилл Лапшин</h1>
+                <div class="position">HTML-верстальщик / Интегратор</div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone pulse"></i>
+                        t.me/labouralways
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope pulse"></i>
+                        versachitdt@gmail.com
+                    </div>
+                    
+                </div>
+            </div>
+        </header>
+        
+        <div class="section">
+            <h2><i class="fas fa-user"></i> Обо мне</h2>
+            <p>Эксперт в области веб-вёрстки с 1 годом опыта, специализирующийся на создании премиальных лендингов для iGaming и Crypto индустрии. Моя страсть - превращать сложные дизайны в безупречные, адаптивные и высокопроизводительные веб-страницы. Используют современные технологии, включая ИИ-инструменты для оптимизации рабочего процесса.</p>
+            <p>Имею опыт локализации проектов для 15+ стран, что включает не только перевод контента, но и культурную адаптацию дизайна. Постоянно совершенствую навыки и слежу за трендами веб-разработки.</p>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-tools"></i> Ключевые навыки</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Технические навыки</h3>
+                    <ul>
+                        <li><span class="highlight">HTML5</span>, <span class="highlight">CSS3</span> (Flexbox, Grid, анимации)</li>
+                        <li><span class="highlight">JavaScript</span> (ES6+), Vue.js</li>
+                        <li><span class="highlight">PHP</span> (AJAX), backend,настройка и проверка форм</li>
+                        <li>Адаптивная и <span class="highlight">кроссбраузерная</span> верстка</li>
+                        <li>Профессиональная работа с <span class="highlight">Figma</span></li>
+                        <li>Интеграция в <span class="highlight">CMS</span> (WordPress)</li>
+                        <li>Оптимизация скорости загрузки (<span class="highlight">Lighthouse 95+</span>)</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-rocket"></i> Про-навыки</h3>
+                    <ul>
+                        <li>Разработка лендингов для <span class="highlight">iGaming, Crypto</span>-проектов</li>
+                        <li><span class="highlight">Локализация</span> и культурная адаптация</li>
+                        <li>Работа с <span class="highlight">ИИ-инструментами</span> (ChatGPT, Copilot)</li>
+                        <li>Интеграция аналитических <span class="highlight">трекеров</span></li>
+                        <li>Создание <span class="highlight">дизайн-систем</span> и компонентов</li>
+                        <li>Оптимизация для <span class="highlight">мобильных устройств</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-briefcase"></i> Опыт работы</h2>
+            <div class="skill-category">
+                <h3> HTML верстальщик</h3>
+               
+                <ul>
+                    <li>Разработал 80+ адаптивных лендингов для IGaming</li>
+                    <li>Руководил маленьким составом, анализировал и находил решение для продуктивности</li>
+                    <li>Локализовал проекты для 18 стран, включая адаптацию дизайна под культурные особенности</li>
+                    <li>Интегрировал ИИ-инструменты, что ускорило разработку на 35%</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category" style="margin-top: 25px;">
+                <h3> Интегратор </h3>
+                
+                <ul>
+                    <li>Работа с Keitaro: создание кампаний, потоков, A/B-тестов</li>
+                    <li>Управление доменами, SSL-сертификатами, защита от ботов</li>
+                    <li>Оптимизация производительности веб-страниц</li>
+                    <li>Интеграция с различными CMS и CRM</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Карусель портфолио -->
+        <div class="portfolio">
+            <h2><i class="fas fa-images"></i> Портфолио</h2>
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item" style="background: linear-gradient(rgba(30, 27, 75, 0.7), rgba(30, 27, 75, 0.7)), url('https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                        <div class="carousel-item-content">
+                            <h4>Luxury Casino Landing</h4>
+                            <p>Элитный лендинг для казино-платформы с анимациями и адаптивным дизайном. Включает сложные UI-компоненты и красивыми анимациями.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="background: linear-gradient(rgba(30, 27, 75, 0.7), rgba(30, 27, 75, 0.7)), url('https://images.unsplash.com/photo-1551029506-0807df4e2031?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                        <div class="carousel-item-content">
+                            <h4>Sports Betting Platform</h4>
+                            <p>Современная платформа для ставок на спорт. Реализована логика с видео, вызывающий дизайн.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="background: linear-gradient(rgba(30, 27, 75, 0.7), rgba(30, 27, 75, 0.7)), url('https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                        <div class="carousel-item-content">
+                            <h4>VIP Poker Club</h4>
+                            <p>Эксклюзивный сайт для покер-клуба с анимированными элементами и темной темой. Оптимизирован для быстрой загрузки на всех устройствах.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="carousel-controls">
+                <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+            <div class="carousel-dots">
+                <div class="dot active" data-index="0"></div>
+                <div class="dot" data-index="1"></div>
+                <div class="dot" data-index="2"></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-handshake"></i>Согласен на...</h2>
+            <div class="conditions">
+                <div class="condition-card">
+                    <h3><i class="fas fa-money-bill-wave"></i>На заработную плату</h3>
+                    <p>от 1000$(готов выслушать за меньшую плату смотря на условия работы)</p>
+                </div>
+                <div class="condition-card">
+                    <h3><i class="fas fa-laptop-house"></i>На формат работы</h3>
+                    <p>Удалённый (полностью)</p>
+                </div>
+                <div class="condition-card">
+                    <h3><i class="fas fa-clock"></i>На график</h3>
+                    <p>На графики: 5/2, 2/2. С утра до вечера ( могу начать с 8 - 10, и работать до 15 - 19 )</p>
+                </div>
+                <div class="condition-card">
+                    <h3><i class="fas fa-globe"></i>На возможности</h3>
+                    <p>Влияние на международный продукт, предложения по улучшению</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Готов применить свой опыт для создания впечатляющих продуктов в вашей команде!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Карусель
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselInner = document.querySelector('.carousel-inner');
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const dots = document.querySelectorAll('.dot');
+            
+            let currentIndex = 0;
+            const itemCount = carouselItems.length;
+            
+            // Функция обновления карусели
+            function updateCarousel() {
+                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Обновление точек
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+            
+            // Следующий слайд
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % itemCount;
+                updateCarousel();
+            });
+            
+            // Предыдущий слайд
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + itemCount) % itemCount;
+                updateCarousel();
+            });
+            
+            // Переключение по точкам
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    currentIndex = parseInt(dot.getAttribute('data-index'));
+                    updateCarousel();
+                });
+            });
+            
+            // Автопереключение
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % itemCount;
+                updateCarousel();
+            }, 5000);
+            
+            // Инициализация
+            updateCarousel();
+        });
+    </script>
+</body>
+</html>
